@@ -1,0 +1,21 @@
+Bootstrap: docker
+From: rockylinux:9.3
+MirrorURL: https://mirror.init7.net/rockylinux/9.3/
+Include: yum
+
+%post
+             yum -y update   
+             yum -y upgrade 
+            yum install -y python-devel gcc-gfortran  openblas openmpi-devel scalapack-openmpi-devel  tcsh openssh-clients which bzip2 patch make perl subversion  findutils hostname git 
+            yum clean all 
+             useradd -c 'NWChem user' -m -d /home/nwchem -s /bin/bash nwchem
+
+%environment
+    export LC_ALL=C
+    export PATH=/usr/local:$PATH
+
+%runscript
+#    fortune | cowsay | lolcat
+
+%labels
+    Author Sravya
